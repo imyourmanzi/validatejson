@@ -13,7 +13,7 @@ Get Express to validate JSON request bodies with
 **Valid Request**
 
 ```sh
-curl -X POST http://localhost:3000/2 -d '{ "id": 4, "name": "adsfads", "timestamp": 2343, "extra": { "it": "works?" } }' -H 'Content-Type: application/json'
+curl -X POST http://localhost:3000/1 -d '{ "id": 4, "name": "adsfads", "timestamp": 2343, "extra": { "it": "works?" } }' -H 'Content-Type: application/json'
 ```
 
 ### `/2`
