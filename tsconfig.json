@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "target": "ES2019",
+      "module": "commonjs",
+      "lib": ["ES2019"],
+      "allowJs": false,
+      "resolveJsonModule": true,
+      "outDir": "./dist",
+      "strict": false,
+      "typeRoots": ["node_modules/@types", "types"],
+      "allowSyntheticDefaultImports": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+    },
+    "include": ["*.ts"],
+    "exclude": ["node_modules"]
+  }

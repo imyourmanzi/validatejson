@@ -1,0 +1,20 @@
+{
+  "name": "validatejson",
+  "version": "1.0.0",
+  "description": "Get Express to validate JSON request bodies",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsc && node ./dist/index.js"
+  },
+  "author": "Matt Manzi",
+  "license": "ISC",
+  "dependencies": {
+    "@sinclair/typebox": "^0.20.4",
+    "express": "^4.17.1",
+    "express-json-validator-middleware": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "typescript": "^4.3.5"
+  }
+}
