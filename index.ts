@@ -8,16 +8,37 @@ const PORT = 3000;
 /**
  * Define a JSON schema.
  */
-const TSchema = Type.Object({
+const T1Schema = Type.Object({
   id: Type.String(),
   name: Type.String(),
   timestamp: Type.Number(),
 });
-
+type T1 = Static<typeof T1Schema>;
 // starts out as `undefined`, which is operates as true
-console.log('allows extra properties:', TSchema.additionalProperties);
+console.log('allows extra properties:', T1Schema.additionalProperties);
 
-type T = Static<typeof TSchema>;
+enum T2Enum {
+  Blue = 'Blue',
+  Brown = 'Brown',
+  Yellow = 'Yellow',
+}
+const enum T2ConstEnum {
+  Blue = 'Blue',
+  Brown = 'Brown',
+  Yellow = 'Yellow',
+}
+const T2Schema = Type.Object({
+  id: Type.Number({ maximum: 3 }),
+  dogId: Type.String({ format: 'uuid' }),
+  /**
+   * const enums in typescript aren't values so we can't use them to get their
+   * values for the JSON schema because they're never stored in memory
+   * https://stackoverflow.com/a/45942460
+   */
+  color: Type.Enum(T2Enum),
+});
+T2Schema.additionalProperties = false;
+type T2 = Static<typeof T2Schema>;
 
 const app = express();
 app.use(express.json());
@@ -30,13 +51,23 @@ app.use(express.json());
  */
 const validator = new Validator({ logger: console });
 
-app.post('/', validator.validate({ body: TSchema }), (req, res) => {
-  const jsonBody = req.body as T;
+app.post('/1', validator.validate({ body: T1Schema }), (req, res) => {
+  const jsonBody = req.body as T1;
 
   res.json({
     sentId: jsonBody.id,
     sentName: jsonBody.name,
     sentTimestamp: jsonBody.timestamp,
+  });
+});
+
+app.post('/2', validator.validate({ body: T2Schema }), (req, res) => {
+  const jsonBody = req.body as T2;
+
+  res.json({
+    sentId: jsonBody.id,
+    sentDogId: jsonBody.dogId,
+    sentColor: jsonBody.color,
   });
 });
 
